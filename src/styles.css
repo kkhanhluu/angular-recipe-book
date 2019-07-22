@@ -1,18 +1,1 @@
-/* Add application styles & imports to this file! */
-* {
-  box-sizing: border-box; 
-  margin: 0; 
-  padding: 0;
-}
-
-html {
-  font-size: 62.5%; 
-}
-
-body {
-  font-size: 1.6rem !important; 
-}
-
-.btn {
-  font-size: 1.6rem !important; 
-}
+/* You can add global styles to this file, and also import other style files */
