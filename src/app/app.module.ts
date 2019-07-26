@@ -19,7 +19,7 @@ import { AuthEffects } from './auth/store/auth.effects';
     HttpClientModule,
     SharedModule,
     CoreModule,
-    StoreModule.forRoot(fromApp.appReducer), 
+    StoreModule.forRoot(fromApp.appReducer),
     EffectsModule.forRoot([AuthEffects])
   ],
   declarations: [AppComponent, HeaderComponent],
