@@ -4,7 +4,10 @@ import { map, tap } from 'rxjs/operators';
 
 import { Recipe } from '../recipes/recipe.model';
 import { RecipesService } from '../recipes/recipes.service';
-import { AuthService } from '../auth/auth.service';
+import { Store } from '@ngrx/store';
+import * as fromApp from '../sotre/app.reducer';
+import * as RecipesAction from '../recipes/store/recipe.actions';
+
 @Injectable({ providedIn: 'root' })
 export class DataStorageService {
   private URL = 'https://angular-course-recipe-bo-caff9.firebaseio.com';
@@ -12,7 +15,7 @@ export class DataStorageService {
   constructor(
     private http: HttpClient,
     private recipesService: RecipesService,
-    private authService: AuthService
+    private store: Store<fromApp.AppState>
   ) {}
 
   storeRecipes() {
@@ -25,18 +28,6 @@ export class DataStorageService {
   }
 
   fetchRecipes() {
-    return this.http.get<Recipe[]>(this.URL + '/recipes.json').pipe(
-      map(recipes => {
-        return recipes.map(recipe => {
-          return {
-            ...recipe,
-            ingredients: recipe.ingredients ? recipe.ingredients : []
-          };
-        });
-      }),
-      tap(recipes => {
-        this.recipesService.setRecipes(recipes);
-      })
-    );
+    this.store.dispatch(new RecipesAction.FetchRecipes());
   }
 }
